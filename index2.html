@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+
+<style>
+    *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body::-webkit-scrollbar
+{
+    display: none;
+}
+
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(bg.jpg)no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  padding: 2px;
+  perspective: 2900px;
+  background-color: black;
+  background-attachment: fixed;
+}
+
+
+.page{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all  1s ease-out;
+    background-color: black;
+    animation: page-fade-in 0.5s;
+    background-attachment: fixed;
+}
+@keyframes page-fade-in
+{
+  from{opacity: 0.1;}
+  to{opacity: 1;}
+}
+
+
+.page  video{
+    z-index: 1;
+    width: 1800px; height: 1000px;
+    border-radius: 10px;
+    object-fit: cover;
+    transform: scale(1.2) translate(0%,0%);
+}
+
+.page .card{
+  z-index: 2;
+  position: absolute;
+  top: 360px;
+  height:310px;
+  transition: all 0.4s ease-in-out;
+  animation: border-color 1s;
+}
+
+
+.page .card img{
+  font-size: 60px;
+  letter-spacing: 2px;
+  height: 380px; width: 550px;
+  transform: translate3d(0,0,90px);
+  animation: card-out 1s;
+  border: solid 0px; border-radius: 3px;
+  
+}
+
+@keyframes card-out
+{
+  from{
+    height: 400px; width: 620px;
+    }
+  to
+  {
+    height: 380px;
+    width: 550px;
+  }
+}
+
+.reg-btn
+{
+  z-index: 3;
+  height: fit-content; width: fit-content;
+  padding: 5px;
+  display: block;
+  position: absolute;
+  top: 80%;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: solid 2px ;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+      <video width="700px" height="400px" muted  autoplay loop>
+        <source src="WhatsApp Video 2023-05-06 at 16.58.46.mp4" type="video/mp4">
+      </video>
+      <div class="card">
+        <img src="event.png">
+      </div>
+      <button class="reg-btn">
+        REGISTOR NOW
+      </button>
+    </div>
+  </div>
+
+<script type="text/javascript">
+const container = document.querySelector(".container");
+const page = document.querySelector(".page");
+const card = document.querySelector(".card");
+const regbtn = document.querySelector(".reg-btn")
+
+
+//card rotate on mouse move
+container.addEventListener("mousemove", (rotate) => {
+  let x = (innerWidth / 2 - rotate.pageX) / 120;
+  let y = (innerHeight / 2 - rotate.pageY) / 120;
+
+  page.style.transform = "rotateY(" + x + "deg) rotateX(" + y + "deg) translate3d(0,0,0px) ";
+});
+
+//card effects on mouse over the card
+container.addEventListener("mouseover", () => {
+  card.style.transform = "translate3d(0, 0,90px)";
+});
+
+//card back to normal when mouse out
+container.addEventListener("mouseout", () => {
+  page.style.transform = "rotateY(0deg) rotateX(0deg) rotateZ(0deg)";
+  card.style.transform = "translate3d(0, 0, 0px)";
+  regbtn.style.transform = "translate3d(0,0,100px)";
+});
+</script>
+
+</body>
+</html>
